@@ -39,6 +39,18 @@ const MORSE_TABLE = {
 
 function decode(expr) {
     // write your solution here
+    const tenBytes = expr.match(/.{10}/g);
+    let result = tenBytes.map(tenByte => {
+        if(tenByte=='**********')
+            return ' ';
+        const twoBytes = tenByte.match(/.{2}/g);
+        let morseCode = twoBytes.map(o=>{
+            return o=='10'?'.':o=='11'?'-':'';
+        })
+
+        return MORSE_TABLE[morseCode.join('')];
+    });
+    return result.join('');
 }
 
 module.exports = {
